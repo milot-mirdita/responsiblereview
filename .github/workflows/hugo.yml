@@ -1,0 +1,33 @@
+name: Build and Deploy Hugo Site
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+
+      - name: Convert TSV to TOML
+        run: |
+          echo 'signatories = [' > data/signatories.toml
+          tail -n +2 signatories.tsv | awk 'BEGIN { FS="\t" } { printf("  { name = \"%s\", affiliation = \"%s\", country = \"%s\" },\n", $1, $2, $3) }' >> data/signatories.toml
+          echo ']' >> data/signatories.toml
+
+      - name: Build Site with Hugo
+        run: hugo
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

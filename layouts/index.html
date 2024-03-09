@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Responsible Bio Review</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    /* reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+        padding: 30px 0;
+        width: 100%;
+        background-color: #411C58;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    h2 {
+        width: 100%;
+        text-align: center;
+        padding: 100px 0;
+        font-size: 24px;
+        background-color: #7d489e;
+        color: #fff;
+    }
+
+    article {
+        padding: 20px;
+        max-width: 600px;
+        margin: 50px auto;
+    }
+
+    #signhere {
+        width: 500px;
+        margin: 50px auto;
+        background-color: #411C58;
+        color: #fff;
+        padding: 50px;
+    }
+    
+    #signhere a {
+        color: #fff;
+    }
+</style>
+</head>
+<body>
+    <h1>Responsible Bio Review</h1>
+    <h2>Commitment to not review closed source software</h2>
+
+    <article>
+        <p>March 9th, 2024</p>
+        <br>
+        <p>I commit to not participated in peer-review of closed-source software published within my field of research. This includes AI-based software released without access to the model weights.</p>
+        <br>
+        <h3>Signatories</h3>
+        <br>
+        <p style="font-style: italic; color: #999; text-align: center;">
+            Affiliations are for identification only and do not imply any institutional endorsement.
+        </p>
+        <br>
+        <p>
+            <div style="float:left">Signatories: {{ len .Site.Data.signatories.signatories }}</div>
+            <div style="float:right">Updated: {{ now.Format "January 2, 2006" }}</div>
+            <div>&nbsp;</div>
+        </p>
+        <br>
+        <p style="clear:both">
+        <ul>
+            {{ range .Site.Data.signatories.signatories }}
+            <li><strong>{{ .name }}</strong>, {{ .affiliation }}, {{ .country }}</li>
+            {{ end }}
+        </ul>
+        </p>
+        <br>
+        <h3>About</h3>
+        <br>
+        <p>
+            This document was prepared in response to the community guidelines proposed at <a href="https://responsiblebiodesign.ai">Responsible AI x Biodesign</a>.
+            Signatories are researchers and practitioners who are committed to not reviewing closed-source software.
+        </p>
+        <br>
+        <p>
+            This document was prepared by Dr Milot Mirdita, SNU, South Korea.
+        </p>
+
+        <div id="signhere">
+            <h3>We invite others to sign on, too.</h3>
+            <br>
+            <p>Submit a pull-request to the <a href="">signatories.tsv</a> file to add your name to this list.</p>
+        </div>
+    </article>
+</body>
